@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route } from 'react-router-dom';
 import data from './data';
 import ProductContext from "./contexts/ProductContext"
@@ -14,9 +14,19 @@ function App() {
 	const [cart, setCart] = useState([]);
 
 	const addItem = item => {
+		console.log("App.js - item = ", item)
 		// add the given item to the cart
-		setCart({...cart, item});
+		setCart([...cart, item]);
 	};
+
+	const removeItem = id =>{
+		setCart(cart.filter(each=>{
+			return each.id !== id; 
+		}))
+	}
+
+	console.log("App.js - cart has length of ", Array.from(cart).length)
+	useEffect(()=>{},[cart])
 
 	return (
 		
@@ -34,7 +44,7 @@ function App() {
 			</Route>
 
 			<Route path="/cart">
-				<CartContext.Provider value ={{cart}}>
+				<CartContext.Provider value ={{cart, removeItem}}>
 					<ShoppingCart />
 				</CartContext.Provider>			
 			</Route>
