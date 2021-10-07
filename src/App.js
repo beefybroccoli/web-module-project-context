@@ -19,11 +19,11 @@ function App() {
 	};
 
 	return (
+		<CartContext.Provider value ={{cart}}>
 		
 		<div className="App">
-			<CartContext.Provider value ={{cart}}>
 				<Navigation />
-			<CartContext.Provider/>
+			
 			
 			{/* Routes */}
 			<Route exact path="/">
@@ -33,10 +33,10 @@ function App() {
 			</Route>
 
 			<Route path="/cart">
-					<CartContext.Provider value={{cart}}>
 						<ShoppingCart cart={cart} />
-					<CartContext.Provider/>
+			
 			</Route>
+			<CartContext.Provider/>
 		</div>
 	);
 }
