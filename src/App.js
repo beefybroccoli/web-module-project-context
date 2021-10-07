@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import data from './data';
 import ProductContext from "./contexts/ProductContext"
+import CartContext from './contexts/CartContext';
 
 // Components
 import Navigation from './components/Navigation';
@@ -17,24 +18,26 @@ function App() {
 		setCart({...cart, item});
 	};
 
-	//?????????????????????????????????????????????????????????
-	// Why usedouble bracket {{...}}
-	//?????????????????????????????????????????????????????????
 	return (
-		<ProductContext.Provider value={{products, addItem}}>
+		
 		<div className="App">
-			<Navigation cart={cart} />
-
+			<CartContext.Provider value ={{cart}}>
+				<Navigation />
+			<CartContext.Provider/>
+			
 			{/* Routes */}
 			<Route exact path="/">
-				<Products />
+				<ProductContext.Provider value={{products, addItem}}>
+					<Products />
+				</ProductContext.Provider>
 			</Route>
 
 			<Route path="/cart">
-				<ShoppingCart cart={cart} />
+					<CartContext.Provider value={{cart}}>
+						<ShoppingCart cart={cart} />
+					<CartContext.Provider/>
 			</Route>
 		</div>
-		</ProductContext.Provider>
 	);
 }
 
