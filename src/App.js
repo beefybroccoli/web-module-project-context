@@ -35,10 +35,9 @@ function App() {
 
 			<Route path="/cart">
 				<CartContext.Provider value ={{cart}}>
-					<ShoppingCart cart={cart} />
+					<ShoppingCart />
 				<CartContext.Provider/>			
 			</Route>
-			<CartContext.Provider/>
 		</div>
 	);
 }
