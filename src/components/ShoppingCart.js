@@ -7,14 +7,14 @@ import Item from './ShoppingCartItem';
 const ShoppingCart = props => {
 	const {cart}=useContext(CartContext);
 	const getCartTotal = () => {
-		return cart.reduce((acc, value) => {
+		return Array.from(cart).reduce((acc, value) => {
 			return acc + value.price;
 		}, 0).toFixed(2);
 	};
 
 	return (
 		<div className="shopping-cart">
-			{cart.map(item => (
+			{Array.from(cart).map(item => (
 				<Item key={item.id} {...item} />
 			))}
 
